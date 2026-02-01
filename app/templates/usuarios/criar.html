@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Novo Usuário</h2>
+
+<form method="POST">
+    <input name="nome" placeholder="Nome"><br><br>
+    <input name="cpf" placeholder="CPF"><br><br>
+    <input name="email" placeholder="Email"><br><br>
+    <input name="login" placeholder="Login"><br><br>
+    <input name="senha" type="password" placeholder="Senha"><br><br>
+
+    <select name="nivel">
+        <option>Administrador</option>
+        <option>Atendente</option>
+        <option>Mecânico</option>
+    </select><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+{% endblock %}
+

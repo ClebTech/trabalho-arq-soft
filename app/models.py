@@ -1,8 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
+from app import db
 from flask_login import UserMixin
 from datetime import datetime
-
-db = SQLAlchemy()
 
 class Usuario(db.Model, UserMixin):
     __tablename__ = 'usuario'

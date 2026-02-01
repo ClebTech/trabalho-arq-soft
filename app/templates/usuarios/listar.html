@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Usuários</h2>
+
+<a href="{{ url_for('usuarios.criar') }}">Novo Usuário</a>
+
+<table border="1">
+    <tr>
+        <th>Nome</th>
+        <th>Login</th>
+        <th>Nível</th>
+    </tr>
+    {% for u in usuarios %}
+    <tr>
+        <td>{{ u.nome }}</td>
+        <td>{{ u.login }}</td>
+        <td>{{ u.nivel }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
