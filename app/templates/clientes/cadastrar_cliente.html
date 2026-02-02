@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastrar Cliente - Locadora DSC{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px; margin-top: 30px;">
+    <div class="card" style="padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h2 style="margin-bottom: 20px; color: var(--primary-color);">👤 Registar Novo Cliente</h2>
+        
+        <form method="POST">
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Nome Completo:</label>
+                <input type="text" name="nome" required placeholder="Ex: João Silva" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">CPF:</label>
+                    <input type="text" name="cpf" required placeholder="000.000.000-00" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">CNH:</label>
+                    <input type="text" name="cnh" required placeholder="Nº da Carteira" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">E-mail:</label>
+                <input type="email" name="email" required placeholder="email@exemplo.com" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Telefone:</label>
+                <input type="text" name="telefone" placeholder="(00) 00000-0000" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Endereço:</label>
+                <input type="text" name="endereco" placeholder="Rua, Número, Bairro" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; flex: 1;">
+                    Guardar Cliente
+                </button>
+                <a href="{{ url_for('clientes.listar') }}" class="btn" style="background-color: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; text-align: center; flex: 1;">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

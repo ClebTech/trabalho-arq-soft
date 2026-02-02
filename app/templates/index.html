@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Página Inicial - Locadora{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center; margin-top: 50px;">
+    <h1>🚗 Sistema de Aluguel de Veículos</h1>
+    <p>A infraestrutura foi configurada com sucesso por <strong>Murphy</strong>!</p>
+    <hr>
+    <p>O banco de dados MySQL está conectado e as tabelas foram criadas.</p>
+    <div style="margin-top: 20px;">
+        <a href="/usuarios" class="btn btn-primary">Gerenciar Usuários</a>
+        <a href="/veiculos" class="btn btn-primary" style="background-color: #28a745;">Ver Frota</a>
+    </div>
+</div>
+{% endblock %}

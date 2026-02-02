@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Histórico de Aluguéis - Locadora DSC{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>Histórico de Aluguéis</h2>
+        <a href="{{ url_for('alugueis.novo') }}" class="btn btn-primary">+ Novo Aluguel</a>
+    </div>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead style="background-color: #f8f9fa;">
+                <tr>
+                    <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">ID</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Cliente</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Veículo</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Data Início</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Status</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Ações</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluguel in alugueis %}
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ aluguel.id }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ aluguel.cliente.nome }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ aluguel.veiculo.modelo }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ aluguel.data_inicio.strftime('%d/%m/%Y') if aluguel.data_inicio else '-' }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                        {% if aluguel.devolvido %}
+                            <span style="color: green;">✔ Devolvido</span>
+                        {% else %}
+                            <span style="color: orange;">⏳ Em aberto</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                        {% if not aluguel.devolvido %}
+                            <a href="{{ url_for('alugueis.devolver', id=aluguel.id) }}" 
+                               class="btn" 
+                               style="background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 0.8rem;">
+                               Confirmar Devolução
+                            </a>
+                        {% else %}
+                            <span style="color: #6c757d;">Finalizado</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 30px; color: #888;">Nenhum registro encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

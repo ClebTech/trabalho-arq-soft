@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestão de Clientes - Locadora DSC{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2> Gestão de Clientes</h2>
+        <a href="{{ url_for('clientes.cadastrar') }}" class="btn" style="background-color: #007bff; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">+ Novo Cliente</a>
+    </div>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead style="background-color: #001a23; color: white;">
+                <tr>
+                    <th style="padding: 12px; text-align: left;">Nome</th>
+                    <th style="padding: 12px; text-align: left;">CPF</th>
+                    <th style="padding: 12px; text-align: left;">CNH</th>
+                    <th style="padding: 12px; text-align: left;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ cliente.nome }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ cliente.cpf }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">{{ cliente.cnh }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                        <a href="{{ url_for('clientes.excluir', id=cliente.id) }}" 
+                           onclick="return confirm('Tem certeza que deseja excluir este cliente?')"
+                           style="color: #dc3545; text-decoration: none; font-weight: bold;">Excluir</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 20px; color: #888;">Nenhum cliente cadastrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

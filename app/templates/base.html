@@ -2,21 +2,31 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Sistema{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Locadora DSC{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <header class="navbar">
+        <div class="logo"><strong>🚗 Locadora DSC</strong></div>
+        <nav>
+            <a href="{{ url_for('veiculos.index') }}">Início</a>
+            <a href="{{ url_for('usuarios.listar') }}">Usuários</a>
+            <a href="{{ url_for('clientes.listar') }}">Clientes</a>
+            <a href="{{ url_for('veiculos.listar') }}">Veículos</a>
+            <a href="{{ url_for('alugueis.historico') }}">Aluguéis</a>
+            <a href="{{ url_for('auth.logout') }}" class="btn-danger">Sair</a>
+        </nav>
+    </header>
 
-<nav>
-    <a href="/">Início</a>
-    <a href="/usuarios">Usuários</a>
-    <a href="/logout">Sair</a>
-</nav>
-
-<hr>
-
-{% block content %}{% endblock %}
-
+    <main class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>
-

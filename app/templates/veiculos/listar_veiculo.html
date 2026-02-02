@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Frota de Veículos - Locadora DSC{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>Frota de Veículos</h2>
+        <a href="{{ url_for('veiculos.cadastrar') }}" class="btn btn-primary">+ Novo Veículo</a>
+    </div>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Marca/Modelo</th>
+                    <th>Placa</th>
+                    <th>Ano</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for veiculo in veiculos %}
+                <tr>
+                    <td>{{ veiculo.id }}</td>
+                    <td><strong>{{ veiculo.marca }}</strong> {{ veiculo.modelo }}</td>
+                    <td>{{ veiculo.placa }}</td>
+                    <td>{{ veiculo.ano }}</td>
+                    <td>
+                        <span class="badge" style="background-color: {{ 'green' if veiculo.status == 'Disponível' else 'red' }}; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem;">
+                            {{ veiculo.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="#" style="color: var(--primary-color); text-decoration: none;">Editar</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 20px;">Nenhum veículo cadastrado na frota.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
