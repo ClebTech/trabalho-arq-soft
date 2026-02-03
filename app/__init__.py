@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
@@ -27,6 +27,10 @@ def create_app():
     app.register_blueprint(veiculos_bp)
     app.register_blueprint(alugueis_bp)
     app.register_blueprint(clientes_bp)
+
+    @app.errorhandler(403)
+    def acesso_proibido(e):
+        return render_template('403.html'), 403
 
     from .models import Usuario, Veiculo, Cliente, Aluguel, Manutencao, Pagamento
     with app.app_context():

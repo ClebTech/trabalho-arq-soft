@@ -7,13 +7,24 @@
 </head>
 <body>
     <header class="navbar">
-        <div class="logo"><strong>🚗 Locadora DSC</strong></div>
+        <div class="logo"><strong>Locadora DSC</strong></div>
         <nav>
-            <a href="{{ url_for('veiculos.index') }}">Início</a>
-            <a href="{{ url_for('usuarios.listar') }}">Usuários</a>
-            <a href="{{ url_for('clientes.listar') }}">Clientes</a>
+            <a href="{{ url_for('auth.index') }}">Início</a>
+
+            {# HIERARQUIA: Apenas Administrador (Murphy) vê Usuários #}
+            {% if current_user.nivel == 'Administrador' %}
+                <a href="{{ url_for('usuarios.listar') }}">Usuários</a>
+            {% endif %}
+
+            {# HIERARQUIA: Administrador e Atendente veem Clientes e Aluguéis #}
+            {% if current_user.nivel in ['Administrador', 'Atendente'] %}
+                <a href="{{ url_for('clientes.listar') }}">Clientes</a>
+                <a href="{{ url_for('alugueis.historico') }}">Aluguéis</a>
+            {% endif %}
+
+            {# Todos veem Veículos (mas as ações internas são protegidas nas rotas) #}
             <a href="{{ url_for('veiculos.listar') }}">Veículos</a>
-            <a href="{{ url_for('alugueis.historico') }}">Aluguéis</a>
+            
             <a href="{{ url_for('auth.logout') }}" class="btn-danger">Sair</a>
         </nav>
     </header>
@@ -26,6 +37,7 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
+
         {% block content %}{% endblock %}
     </main>
 </body>
